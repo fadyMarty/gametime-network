@@ -1,8 +1,15 @@
 query Countries {
     countries {
+        code
         name
         capital
-        code
         emoji
+        currency
+        languages {
+            name
+        }
+        continent {
+            name
+        }
     }
 }

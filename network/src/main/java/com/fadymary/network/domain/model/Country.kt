@@ -1,6 +1,6 @@
-package com.fadymary.network.domain
+package com.fadymary.network.domain.model
 
-data class DetailedCountry(
+data class Country(
     val code: String,
     val name: String,
     val emoji: String,
