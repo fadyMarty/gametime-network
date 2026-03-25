@@ -6,7 +6,7 @@ import com.fadymarty.CountryQuery
 import com.fadymary.network.common.util.Result
 import com.fadymary.network.common.util.safeCall
 
-class RemoteCountryDataSourceImpl(
+class ApolloRemoteCountryDataSource(
     private val apolloClient: ApolloClient,
 ) : RemoteCountryDataSource {
 

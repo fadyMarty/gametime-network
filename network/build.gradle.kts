@@ -48,7 +48,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.koin.android)
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
     implementation(libs.apollo.runtime)
+    implementation(libs.androidx.datastore.preferences)
 }
