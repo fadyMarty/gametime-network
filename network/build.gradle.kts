@@ -50,4 +50,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.apollo.runtime)
     implementation(libs.androidx.datastore.preferences)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockwebserver3)
+    testImplementation(libs.truth)
 }
