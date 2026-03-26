@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.apollo.runtime)
     implementation(libs.androidx.datastore.preferences)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.apollo.mockserver)
     testImplementation(libs.mockwebserver3)
     testImplementation(libs.truth)
 }

@@ -1,7 +1,7 @@
 package com.fadymary.network.data.repository
 
 import com.fadymary.network.common.util.Result
-import com.fadymary.network.common.util.map
+import com.fadymary.network.common.util.safeCall
 import com.fadymary.network.data.data_source.remote.RemoteCountryDataSource
 import com.fadymary.network.data.mappers.toCountry
 import com.fadymary.network.domain.model.Country
@@ -12,16 +12,18 @@ class CountryRepositoryImpl(
 ) : CountryRepository {
 
     override suspend fun getCountries(): Result<List<Country>> {
-        return remoteCountryDataSource
-            .getCountries()
-            .map { countries ->
-                countries.map { it.toCountry() }
-            }
+        return safeCall {
+            remoteCountryDataSource
+                .getCountries()
+                .map { it.toCountry() }
+        }
     }
 
     override suspend fun getCountry(code: String): Result<Country?> {
-        return remoteCountryDataSource
-            .getCountry(code)
-            .map { it?.toCountry() }
+        return safeCall {
+            remoteCountryDataSource
+                .getCountry(code)
+                ?.toCountry()
+        }
     }
 }
