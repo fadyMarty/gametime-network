@@ -6,6 +6,10 @@ plugins {
 apollo {
     service("service") {
         packageName.set("com.fadymarty")
+        introspection {
+            endpointUrl.set("https://countries.trevorblades.com/graphql")
+            schemaFile.set(file("src/main/graphql/com/fadymarty/schema.graphqls"))
+        }
     }
 }
 

@@ -32,7 +32,7 @@ val networkModule = module {
 
         ApolloClient.Builder()
             .httpServerUrl(Constants.SERVER_URL)
-            .webSocketServerUrl(Constants.WEBSOCKET_SERVER_URL)
+            .webSocketServerUrl(Constants.SERVER_URL)
             .addHttpInterceptor(LoggingInterceptor())
             .addHttpInterceptor(get<AuthInterceptor>())
             .wsProtocol(
