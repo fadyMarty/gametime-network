@@ -8,14 +8,13 @@ import com.fadymary.network.domain.manager.TokenManager
 import kotlinx.coroutines.flow.first
 
 class AuthInterceptor(
-    private val tokenManager: TokenManager
+    private val tokenManager: TokenManager,
 ) : HttpInterceptor {
     override suspend fun intercept(
         request: HttpRequest,
         chain: HttpInterceptorChain,
     ): HttpResponse {
         val token = tokenManager.getToken().first()
-
         return chain.proceed(
             request = request.newBuilder()
                 .addHeader("Authorization", "Bearer $token")

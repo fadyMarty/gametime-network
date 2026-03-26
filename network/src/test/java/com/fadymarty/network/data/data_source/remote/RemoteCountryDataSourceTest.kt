@@ -1,40 +1,39 @@
 package com.fadymarty.network.data.data_source.remote
 
 import com.apollographql.apollo.ApolloClient
-import com.fadymary.network.common.util.Result
+import com.apollographql.mockserver.MockResponse
+import com.apollographql.mockserver.MockServer
 import com.fadymary.network.data.data_source.remote.ApolloRemoteCountryDataSource
 import com.fadymary.network.data.data_source.remote.RemoteCountryDataSource
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
-import mockwebserver3.MockResponse
-import mockwebserver3.MockWebServer
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 class RemoteCountryDataSourceTest {
 
-    private lateinit var mockWebServer: MockWebServer
+    private lateinit var mockServer: MockServer
     private lateinit var apolloClient: ApolloClient
     private lateinit var remoteCountryDataSource: RemoteCountryDataSource
 
     @Before
-    fun setUp() {
-        mockWebServer = MockWebServer()
-        mockWebServer.start()
+    fun setUp() = runBlocking {
+        mockServer = MockServer()
         apolloClient = ApolloClient.Builder()
-            .httpServerUrl(mockWebServer.url("/graphql").toString())
+            .httpServerUrl(mockServer.url())
             .build()
         remoteCountryDataSource = ApolloRemoteCountryDataSource(apolloClient)
     }
 
     @After
     fun tearDown() {
-        mockWebServer.close()
+        mockServer.close()
     }
 
     @Test
-    fun `getCountries() should return list of countries`() = runTest {
+    fun `getCountries returns list of countries when response is successful`() = runTest {
         val mockResponse = MockResponse.Builder()
             .body(
                 """
@@ -77,14 +76,15 @@ class RemoteCountryDataSourceTest {
                 """.trimIndent()
             )
             .build()
-        mockWebServer.enqueue(mockResponse)
-        val result = remoteCountryDataSource.getCountries()
-        val data = (result as Result.Success).data
-        val request = mockWebServer.takeRequest()
-        assertThat(data[0].code).isEqualTo("AD")
-        assertThat(data[0].name).isEqualTo("Andorra")
-        assertThat(data[1].code).isEqualTo("AE")
-        assertThat(data[1].name).isEqualTo("United Arab Emirates")
-        assertThat(request.url.encodedPath).isEqualTo("/graphql")
+        mockServer.enqueue(mockResponse)
+
+        val countries = remoteCountryDataSource.getCountries()
+        val request = mockServer.takeRequest()
+
+        assertThat(countries[0].code).isEqualTo("AD")
+        assertThat(countries[0].name).isEqualTo("Andorra")
+        assertThat(countries[1].code).isEqualTo("AE")
+        assertThat(countries[1].name).isEqualTo("United Arab Emirates")
+        assertThat(request.path).isEqualTo("/")
     }
 }

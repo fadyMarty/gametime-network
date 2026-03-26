@@ -16,7 +16,6 @@ apollo = "4.4.2"
 datastorePreferences = "1.2.1"
 kotlinxCoroutinesTest = "1.10.2"
 apolloMockserver = "0.3.1"
-mockwebserver3 = "5.3.2"
 truth = "1.4.5"
 
 [libraries]
@@ -43,7 +42,6 @@ apollo-runtime = { module = "com.apollographql.apollo:apollo-runtime", version.r
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 apollo-mockserver = { module = "com.apollographql.mockserver:apollo-mockserver", version.ref = "apolloMockserver" }
-mockwebserver3 = { module = "com.squareup.okhttp3:mockwebserver3", version.ref = "mockwebserver3" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
 [plugins]
