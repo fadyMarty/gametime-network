@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.fadymary.gametime.network"
+    namespace = "com.fadymarty.gametime.network"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.fadymary.gametime.network"
+        applicationId = "com.fadymarty.gametime.network"
         minSdk = 34
         targetSdk = 36
         versionCode = 1

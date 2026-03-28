@@ -7,14 +7,14 @@ apollo {
     service("service") {
         packageName.set("com.fadymarty")
         introspection {
-            endpointUrl.set("https://countries.trevorblades.com/graphql")
+            endpointUrl.set("https://graphqlzero.almansi.me/api")
             schemaFile.set(file("src/main/graphql/com/fadymarty/schema.graphqls"))
         }
     }
 }
 
 android {
-    namespace = "com.fadymary.network"
+    namespace = "com.fadymarty.network"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
